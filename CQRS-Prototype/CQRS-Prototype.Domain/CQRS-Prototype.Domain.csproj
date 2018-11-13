@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <RootNamespace>CQRS_Prototype.Domain</RootNamespace>
+	<LangVersion>7.1</LangVersion>
   </PropertyGroup>
 
 </Project>

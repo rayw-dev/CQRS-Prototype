@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace CQRS_Prototype.Domain.Interfaces
 {
-    public interface ICustomer<A, AH, C> where A : IAddress<C> where C : ICountry where AH : ICustomerAddressHistory
+    public interface ICustomer<A, AH, C, SA> where A : IAddress<C> where C : ICountry where AH : ICustomerAddressHistory where SA: ICustomerShippingAddress
     {
         long Id { get; set; }
         string FirstName { get; set; }
@@ -11,7 +11,7 @@ namespace CQRS_Prototype.Domain.Interfaces
         long BillingAddressId { get; set; }
         A BillingAddress { get; set; }
         IEnumerable<AH> BillingAddressHistory { get; set; }
-        IEnumerable<A> ShippingAddresses { get; set; }
+        IEnumerable<SA> ShippingAddresses { get; set; }
     }
 
     public interface ICustomerAddressHistory
@@ -20,5 +20,11 @@ namespace CQRS_Prototype.Domain.Interfaces
         long AddressId { get; set; }
         DateTime EffectiveFrom { get; set; }
         DateTime? EffectiveTo { get; set; }
+    }
+
+    public interface ICustomerShippingAddress
+    {
+        long CustomerId { get; set; }
+        long AddressId { get; set; }
     }
 }

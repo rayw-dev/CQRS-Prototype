@@ -10,6 +10,7 @@ namespace CQRS_Prototype.Domain.Interfaces
         string ThirdLine { get; set; }
         string FourthLine { get; set; }
         string City { get; set; }
+        long CountryId { get; set; }
         C Country { get; set; }
         string PostalCode { get; set; }
         string Latitude { get; set; }
