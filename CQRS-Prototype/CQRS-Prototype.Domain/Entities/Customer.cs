@@ -1,12 +1,12 @@
-﻿using CQRS_Prototype.Domain.Interfaces;
+﻿using CQRS_Prototype.Domain.Core.Models;
+using CQRS_Prototype.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
 
 namespace CQRS_Prototype.Domain.Entities
 {
-    public class Customer : ICustomer<Address, CustomerAddressHistory, Country, CustomerShippingAddress>
+    public class Customer : Entity<long>, ICustomer<Address, CustomerAddressHistory, Country, CustomerShippingAddress, long>
     {
-        public long Id { get; set; }
         public string FirstName { get; set; }
         public string Surname { get; set; }
         public long BillingAddressId { get; set; }
@@ -15,7 +15,7 @@ namespace CQRS_Prototype.Domain.Entities
         public IEnumerable<CustomerShippingAddress> ShippingAddresses { get; set; }
     }
 
-    public class CustomerAddressHistory : ICustomerAddressHistory
+    public class CustomerAddressHistory : ICustomerAddressHistory<long>
     {
         public long CustomerId { get; set; }
         public long AddressId { get; set; }
@@ -23,7 +23,7 @@ namespace CQRS_Prototype.Domain.Entities
         public DateTime? EffectiveTo { get; set; }
     }
 
-    public class CustomerShippingAddress : ICustomerShippingAddress
+    public class CustomerShippingAddress : ICustomerShippingAddress<long>
     {
         public long CustomerId { get; set; }
         public long AddressId { get; set; }

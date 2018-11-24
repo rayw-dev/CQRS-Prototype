@@ -1,8 +1,9 @@
-﻿namespace CQRS_Prototype.Domain.Interfaces
+﻿using CQRS_Prototype.Domain.Core.Interfaces;
+
+namespace CQRS_Prototype.Domain.Interfaces
 {
-    public interface ICountry
+    public interface ICountry<TKey> : IEntity<TKey>
     {
-        long Id { get; set; }
         string CountryName { get; set; }
         string CountryCode { get; set; }
     }

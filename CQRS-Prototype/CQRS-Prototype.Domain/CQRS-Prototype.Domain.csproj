@@ -6,4 +6,8 @@
 	<LangVersion>7.1</LangVersion>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CQRS-Prototype.Domain.Core\CQRS-Prototype.Domain.Core.csproj" />
+  </ItemGroup>
+
 </Project>
