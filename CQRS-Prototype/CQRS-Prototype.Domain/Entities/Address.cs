@@ -1,10 +1,9 @@
 ﻿using CQRS_Prototype.Domain.Core.Models;
 using CQRS_Prototype.Domain.Interfaces;
-using System;
 
 namespace CQRS_Prototype.Domain.Entities
 {
-    public class Address : Entity<long>, IAddress<Country, long>
+    public class Address : Entity<long>, IAddress
     {
         public string FirstLine { get; set; }
         public string SecondLine { get; set; }

@@ -2,7 +2,7 @@
 
 namespace CQRS_Prototype.Domain.Interfaces
 {
-    public interface IAddressRepository : IRepository<Address, long>
+    public interface ICustomerRepository : IRepository<Customer, long>
     {
     }
 }

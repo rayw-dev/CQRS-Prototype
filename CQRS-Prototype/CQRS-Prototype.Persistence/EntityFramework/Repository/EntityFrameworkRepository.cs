@@ -1,12 +1,11 @@
-﻿using CQRS_Prototype.Domain.Core.Interfaces;
-using CQRS_Prototype.Domain.Interfaces;
+﻿using CQRS_Prototype.Domain.Interfaces;
 using CQRS_Prototype.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
 namespace CQRS_Prototype.Persistence.EntityFramework.Repository
 {
-    public abstract class EntityFrameworkRepository<TContext, TEntity, TKey> : IRepository<TEntity, TKey> where TContext : DbContext where TEntity : class, IEntity<TKey>
+    public abstract class EntityFrameworkRepository<TContext, TEntity, TKey> : IRepository<TEntity, TKey> where TContext : DbContext where TEntity : class
     {
         protected readonly TContext DataContext;
         protected readonly DbSet<TEntity> DbSet;

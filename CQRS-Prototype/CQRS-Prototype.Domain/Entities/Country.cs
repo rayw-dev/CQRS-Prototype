@@ -3,7 +3,7 @@ using CQRS_Prototype.Domain.Interfaces;
 
 namespace CQRS_Prototype.Domain.Entities
 {
-    public class Country : Entity<long>, ICountry<long>
+    public class Country : Entity<long>, ICountry
     {
         public string CountryName { get; set; }
         public string CountryCode { get; set; }

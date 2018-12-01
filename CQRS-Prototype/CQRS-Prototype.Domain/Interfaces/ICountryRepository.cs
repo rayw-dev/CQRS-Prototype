@@ -1,6 +1,8 @@
-﻿namespace CQRS_Prototype.Domain.Interfaces
+﻿using CQRS_Prototype.Domain.Entities;
+
+namespace CQRS_Prototype.Domain.Interfaces
 {
-    public interface ICountryRepository<C, TKey> : IRepository<C, TKey> where C : class, ICountry<TKey>
+    public interface ICountryRepository : IRepository<Country, long>
     {
     }
 }
