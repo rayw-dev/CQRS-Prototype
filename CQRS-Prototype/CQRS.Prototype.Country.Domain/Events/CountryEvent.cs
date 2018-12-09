@@ -1,9 +1,11 @@
 ﻿using CQRS.Prototype.Country.Domain.Extensions;
 using CQRS.Prototype.Country.Domain.Interfaces;
+using CQRS_Prototype.Domain.Core.Events;
+using System;
 
-namespace CQRS.Prototype.Country.Domain.Models
+namespace CQRS.Prototype.Country.Domain.Events
 {
-    public class Country : ICountry
+    public abstract class CountryEvent : Event<Guid>, ICountry
     {
         public long Id { get; set; }
         public string EnglishName { get; set; }
@@ -13,11 +15,12 @@ namespace CQRS.Prototype.Country.Domain.Models
         public int NumericCode { get; set; }
         public bool Independant { get; set; }
 
-        public Country()
+        public CountryEvent() : base()
         {
 
         }
-        public Country(ICountry country)
+
+        public CountryEvent(ICountry country) : this()
         {
             this.Merge(country);
         }

@@ -6,10 +6,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CQRS-Prototype.Domain.Core\CQRS-Prototype.Domain.Core.csproj" />
+    <ProjectReference Include="..\CQRS-Prototype.Domain\CQRS-Prototype.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="FluentValidation" Version="8.0.101" />
+    <PackageReference Include="MediatR" Version="5.1.0" />
   </ItemGroup>
 
 </Project>

@@ -2,6 +2,7 @@
 {
     public interface ICountry
     {
+        long Id { get; set; }
         string EnglishName { get; set; }
         string LocalName { get; set; }
         string Alpha2Code { get; set; }

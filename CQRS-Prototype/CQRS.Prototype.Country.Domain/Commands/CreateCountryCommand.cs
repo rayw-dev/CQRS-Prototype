@@ -1,11 +1,12 @@
-﻿using CQRS.Prototype.Country.Domain.Interfaces;
-using CQRS.Prototype.Country.Domain.Validators;
+﻿using CQRS.Prototype.Country.Domain.Validators;
+using CQRS_Prototype.Domain.Core.Interfaces;
+using MediatR;
 
 namespace CQRS.Prototype.Country.Domain.Commands
 {
-    public class CreateCountryCommand : CountryCommand
+    public class CreateCountryCommand : CountryCommand, IRequest<IActionResponse<Models.Country>>
     {
-        public CreateCountryCommand(ICountry country) : base(country)
+        public CreateCountryCommand(Interfaces.ICountry country) : base(country)
         {
         }
 

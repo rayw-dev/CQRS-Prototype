@@ -10,9 +10,10 @@ namespace CQRS_Prototype.Domain.Core.Notifications
         public string Value { get; private set; }
         public int Version { get; private set; }
 
-        public DomainNotification(string key, string value)
+        public DomainNotification(EventType type, string key, string value)
         {
             DomainNotificationId = Guid.NewGuid();
+            EventType = type;
             Version = 1;
             Key = key;
             Value = value;
