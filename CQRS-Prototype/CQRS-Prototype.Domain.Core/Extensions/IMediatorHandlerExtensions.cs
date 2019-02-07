@@ -14,13 +14,34 @@ namespace CQRS_Prototype.Domain.Core.Extensions
         /// <param name="errorKey"></param>
         public static void RaiseOnResponse(this IMediatorHandler handler, IActionResponse response, string errorKey)
         {
-            if (handler == null || response == null || response.ErrorMessages == null || response.ErrorMessages.Count < 1) return;
-            response.ErrorMessages.ForEach(async e =>
+            if (handler == null || response == null) return;
+            if (response.HasErrors)
             {
-                await handler.RaiseEvent(new DomainNotification(EventType.Error,
-                    errorKey,
-                    e));
-            });
+                response.ErrorMessages.ForEach(async e =>
+                {
+                    await handler.RaiseEvent(new DomainNotification(EventType.Error,
+                        errorKey,
+                        e));
+                });
+            }
+            if (response.HasWarnings)
+            {
+                response.WarningMessages.ForEach(async e =>
+                {
+                    await handler.RaiseEvent(new DomainNotification(EventType.Warning,
+                        errorKey,
+                        e));
+                });
+            }
+            if (response.HasInfo)
+            {
+                response.InfoMessages.ForEach(async e =>
+                {
+                    await handler.RaiseEvent(new DomainNotification(EventType.Info,
+                        errorKey,
+                        e));
+                });
+            }
         }
     }
 }

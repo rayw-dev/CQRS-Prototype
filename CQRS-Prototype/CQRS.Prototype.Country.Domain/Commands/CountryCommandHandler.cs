@@ -43,7 +43,7 @@ namespace CQRS.Prototype.Country.Domain.Commands
                 return response;
             }
 
-            var existingCountry = await _countryService.FetchByAlpha3Code(request.Alpha3Code);
+            var existingCountry = _countryService.FetchByAlpha3Code(request.Alpha3Code);
             if (existingCountry.Success && existingCountry.Data != null && existingCountry.Data.Id > 0)
             {
                 var errorMessage = $"Country {request.EnglishName} ({request.Alpha3Code}) already exists.";
@@ -55,7 +55,7 @@ namespace CQRS.Prototype.Country.Domain.Commands
                 return response;
             }
 
-            var createResponse = await _countryService.Create(new Models.Country(request));
+            var createResponse = _countryService.Persist(new Models.Country(request));
             response.MergeResponse(createResponse);
             Bus.RaiseOnResponse(response, $"Error Creating Country {request.EnglishName} ({request.Alpha3Code})");
             if (response.Success && Commit())
@@ -78,7 +78,7 @@ namespace CQRS.Prototype.Country.Domain.Commands
                 return response;
             }
 
-            var existingCountry = await _countryService.FetchSingle(request.Id);
+            var existingCountry = _countryService.FetchSingle(request.Id);
             if (existingCountry.Data == null || existingCountry.Data.Id < 1)
             {
                 var errorMessage = $"Country {request.EnglishName} ({request.Alpha3Code}) does not exist.";
@@ -90,7 +90,7 @@ namespace CQRS.Prototype.Country.Domain.Commands
                 return response;
             }
 
-            var updateResponse = await _countryService.Update(new Models.Country(request));
+            var updateResponse = _countryService.Persist(new Models.Country(request));
             response.MergeResponse(updateResponse);
             Bus.RaiseOnResponse(response, $"Error Updating Country {request.EnglishName} ({request.Alpha3Code})");
             if (response.Success && Commit())
@@ -113,7 +113,7 @@ namespace CQRS.Prototype.Country.Domain.Commands
                 return response;
             }
 
-            var existingCountry = await _countryService.FetchSingle(request.Id);
+            var existingCountry = _countryService.FetchSingle(request.Id);
             if (existingCountry.Data == null || existingCountry.Data.Id < 1)
             {
                 var errorMessage = $"Country {request.EnglishName} ({request.Alpha3Code}) does not exist.";
@@ -125,7 +125,7 @@ namespace CQRS.Prototype.Country.Domain.Commands
                 return response;
             }
 
-            var deleteResponse = await _countryService.Delete(new Models.Country(request));
+            var deleteResponse = _countryService.Delete(new Models.Country(request));
             response.MergeResponse(deleteResponse);
             Bus.RaiseOnResponse(response, $"Error Deleting Country {request.EnglishName} ({request.Alpha3Code})");
             if (response.Success && Commit())
@@ -139,7 +139,7 @@ namespace CQRS.Prototype.Country.Domain.Commands
         public async Task<IActionResponse<PagedResult<Models.Country>>> Handle(CountryListQuery request, CancellationToken cancellationToken)
         {
             var response = new ActionResponse<PagedResult<Models.Country>> { Success = true, Data = new PagedResult<Models.Country>() };
-            var queryResult = await _countryService.FetchList(request);
+            var queryResult = await Task.Run(() => _countryService.FetchList(request));
             response.MergeResponse(queryResult);
             Bus.RaiseOnResponse(response, $"Error During Country Query");
             if (response.Success)

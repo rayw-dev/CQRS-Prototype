@@ -4,6 +4,11 @@ namespace CQRS.Prototype.Country.Domain.Extensions
 {
     public static class CountryExtensions
     {
+        /// <summary>
+        /// Merge Properties from left to right
+        /// </summary>
+        /// <param name="to"></param>
+        /// <param name="from"></param>
         public static void Merge(this ICountry to, ICountry from)
         {
             to.Id = from.Id;

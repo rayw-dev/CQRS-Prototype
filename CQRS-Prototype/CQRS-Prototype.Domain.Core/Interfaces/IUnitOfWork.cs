@@ -4,6 +4,6 @@ namespace CQRS_Prototype.Domain.Core.Interfaces
 {
     public interface IUnitOfWork : IDisposable
     {
-        bool Commit();
+        IActionResponse<int> Commit();
     }
 }

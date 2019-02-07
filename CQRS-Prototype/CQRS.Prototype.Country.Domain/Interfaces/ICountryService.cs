@@ -7,12 +7,12 @@ namespace CQRS.Prototype.Country.Domain.Interfaces
 {
     public interface ICountryService : IDataTransferService<Models.Country>
     {
-        Task<IActionResponse<PagedResult<Models.Country>>> FetchList(ICountryListQuery query);
-        Task<IActionResponse<Models.Country>> FetchSingle(long Id);
-        Task<IActionResponse<Models.Country>> FetchByEnglishName(string country);
-        Task<IActionResponse<Models.Country>> FetchByLocalName(string country);
-        Task<IActionResponse<Models.Country>> FetchByAlpha2Code(string code);
-        Task<IActionResponse<Models.Country>> FetchByAlpha3Code(string code);
-        Task<IActionResponse<Models.Country>> FetchByNumericCode(int code);
+        IActionResponse<PagedResult<Models.Country>> FetchList(ICountryListQuery query);
+        IActionResponse<Models.Country> FetchSingle(long Id);
+        IActionResponse<Models.Country> FetchByEnglishName(string country);
+        IActionResponse<Models.Country> FetchByLocalName(string country);
+        IActionResponse<Models.Country> FetchByAlpha2Code(string code);
+        IActionResponse<Models.Country> FetchByAlpha3Code(string code);
+        IActionResponse<Models.Country> FetchByNumericCode(int code);
     }
 }

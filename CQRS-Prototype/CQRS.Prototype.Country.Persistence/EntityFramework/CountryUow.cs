@@ -1,23 +1,24 @@
-﻿using CQRS_Prototype.Domain.Core.Interfaces;
+﻿using CQRS.Prototype.Country.Domain.Interfaces;
+using CQRS_Prototype.Domain.Core.Interfaces;
 
 namespace CQRS.Prototype.Country.Persistence.EntityFramework
 {
     public class CountryUow : IUnitOfWork
     {
-        readonly CountryContext _context;
-        public CountryUow(CountryContext context)
+        readonly ICountryService _countryService;
+        public CountryUow(ICountryService service)
         {
-            _context = context;
+            _countryService = service;
         }
 
-        public bool Commit()
+        public IActionResponse<int> Commit()
         {
-            return _context.SaveChanges() > 0;
+            return _countryService.CommitChanges();
         }
 
         public void Dispose()
         {
-            //_context.Dispose(); ??? TEST
+            
         }
     }
 }

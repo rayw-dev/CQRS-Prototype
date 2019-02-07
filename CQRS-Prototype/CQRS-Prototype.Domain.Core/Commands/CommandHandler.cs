@@ -1,4 +1,5 @@
 ﻿using CQRS_Prototype.Domain.Core.Events;
+using CQRS_Prototype.Domain.Core.Extensions;
 using CQRS_Prototype.Domain.Core.Interfaces;
 using CQRS_Prototype.Domain.Core.Notifications;
 using MediatR;
@@ -29,7 +30,11 @@ namespace CQRS_Prototype.Domain.Core.Commands
         public bool Commit()
         {
             if (_notifications.HasNotifications()) return false;
-            if (_uow.Commit()) return true;
+            var commitResponse = _uow.Commit();
+            //report messages from the commit, Include Info and warnings in the event of success
+            Bus.RaiseOnResponse(commitResponse, "Commit");
+
+            if (commitResponse.Success) return true;
 
             Bus.RaiseEvent(new DomainNotification(EventType.Error, "Commit", "We had a problem during saving your data."));
             return false;
